@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criostoir</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f6f8;margin:0;padding:20px}
+.container{max-width:600px;margin:auto}
+h1{text-align:center}
+.card{background:white;padding:20px;margin:15px 0;border-radius:12px;box-shadow:0 2px 8px #ccc}
+input{width:100%;padding:12px;margin:8px 0;box-sizing:border-box}
+button{width:100%;padding:14px;background:#222;color:white;border:0;border-radius:8px}
+.result{font-size:20px;font-weight:bold;text-align:center;margin-top:15px}
+.warning{font-size:14px;color:#666}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>📈 Criostoir</h1>
+
+<div class="card">
+<h2>Risk Manager</h2>
+
+<label>Account Balance (€)</label>
+<input id="balance" type="number" value="1000">
+
+<label>Risk per Trade (%)</label>
+<input id="risk" type="number" value="1">
+
+<label>Stop Loss Distance per Unit (€)</label>
+<input id="stop" type="number" value="2">
+
+<button onclick="calculate()">Calculate Safe Size</button>
+
+<div id="result" class="result"></div>
+
+<p class="warning">
+Risk control only — this is not financial advice.
+</p>
+</div>
+
+</div>
+
+<script>
+function calculate(){
+const balance=Number(document.getElementById("balance").value);
+const risk=Number(document.getElementById("risk").value);
+const stop=Number(document.getElementById("stop").value);
+
+const maxLoss=balance*(risk/100);
+const units=stop>0 ? Math.floor(maxLoss/stop) : 0;
+
+document.getElementById("result").innerHTML =
+"Maximum planned loss: €"+maxLoss.toFixed(2)+
+"<br>Suggested safe size: "+units+" units";
+}
+</script>
+
+</body>
+</html>
