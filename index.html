@@ -1,141 +1,75 @@
-
-<!DOCTYPE html
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Criostoir Utilities</title>
-
+<title>Criostoir</title>
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f2f5f9;
-  margin: 0;
-  padding: 20px;
-  color: #222;
-}
-
-.container {
-  max-width: 500px;
-  margin: auto;
-}
-
-h1 {
-  text-align: center;
-  color: #1565c0;
-}
-
-.card {
-  background: white;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 15px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-}
-
-label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 6px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 18px;
-}
-
-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px;
-  background: #1565c0;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-button:active {
-  background: #0d47a1;
-}
-
-.result {
-  margin-top: 20px;
-  padding: 15px;
-  background: #e8f1ff;
-  border-radius: 10px;
-  font-size: 18px;
-  line-height: 1.7;
-}
+body{font-family:Arial,sans-serif;margin:0;background:#f2f5f7;color:#222}
+header{background:#123b5d;color:white;text-align:center;padding:25px}
+header h1{margin:0;font-size:34px}
+header p{margin:8px 0 0}
+main{max-width:700px;margin:25px auto;padding:15px}
+.card{background:white;padding:20px;margin:15px 0;border-radius:12px;box-shadow:0 2px 8px #bbb}
+button{width:100%;padding:15px;margin-top:8px;border:0;border-radius:8px;background:#1677c8;color:white;font-size:17px}
+input{width:100%;padding:12px;box-sizing:border-box;border:1px solid #ccc;border-radius:8px;margin:6px 0}
+.result{font-size:20px;font-weight:bold;margin-top:12px}
+footer{text-align:center;padding:25px;color:#666}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>
+<h1>CRIÓSTOIR</h1>
+<p>Simple Money & Trading Tools</p>
+</header>
 
-<h1>CRIostoir Utilities</h1>
+<main>
 
 <div class="card">
-
-<h2>💶 Tip & Bill Split</h2>
-
-<label>Bill Amount (€)</label>
-<input type="number" id="bill" placeholder="e.g. 100">
-
-<label>Tip (%)</label>
-<input type="number" id="tip" placeholder="e.g. 10">
-
-<label>Number of People</label>
-<input type="number" id="people" placeholder="e.g. 2">
-
-<button onclick="calculate()">CALCULATE</button>
-
-<div class="result" id="result">
-Enter your details above.
+<h2>💰 Money Planner</h2>
+<p>Plan your money simply and clearly.</p>
+<input id="income" type="number" placeholder="Monthly income €">
+<input id="expenses" type="number" placeholder="Monthly expenses €">
+<button onclick="planMoney()">Calculate</button>
+<div id="moneyResult" class="result"></div>
 </div>
 
+<div class="card">
+<h2>📊 Trading Planner</h2>
+<p>Use this before making a trade.</p>
+<input id="amount" type="number" placeholder="Amount you want to invest €">
+<input id="risk" type="number" placeholder="Risk %">
+<button onclick="tradePlan()">Calculate Risk</button>
+<div id="tradeResult" class="result"></div>
 </div>
 
+<div class="card">
+<h2>🧮 Tip & Bill Split</h2>
+<input id="bill" type="number" placeholder="Bill €">
+<input id="people" type="number" placeholder="Number of people">
+<input id="tip" type="number" placeholder="Tip %">
+<button onclick="splitBill()">Split Bill</button>
+<div id="splitResult" class="result"></div>
 </div>
+
+<div class="card">
+<h2>🚀 Criostoir</h2>
+<p>Your simple starting point for money planning and trading education.</p>
+<button onclick="alert('Criostoir is ready!')">Start</button>
+</div>
+
+</main>
+
+<footer>
+Criostoir © 2026
+</footer>
 
 <script>
-function calculate() {
-
-  let bill = parseFloat(document.getElementById("bill").value);
-  let tip = parseFloat(document.getElementById("tip").value);
-  let people = parseInt(document.getElementById("people").value);
-
-  if (!bill || bill <= 0) {
-    document.getElementById("result").innerHTML =
-      "Please enter the bill amount.";
-    return;
-  }
-
-  if (isNaN(tip) || tip < 0) {
-    tip = 0;
-  }
-
-  if (!people || people < 1) {
-    people = 1;
-  }
-
-  let tipAmount = bill * (tip / 100);
-  let total = bill + tipAmount;
-  let each = total / people;
-
-  document.getElementById("result").innerHTML =
-    "Tip: €" + tipAmount.toFixed(2) +
-    "<br>Total: €" + total.toFixed(2) +
-    "<br>Each person: €" + each.toFixed(2);
-}
-</script>
-
-</body>
-</html>
+function planMoney(){
+let income=Number(document.getElementById("income").value);
+let expenses=Number(document.getElementById("expenses").value);
+let left=income-expenses;
+document.getElementById("moneyResult").innerText=
+"
