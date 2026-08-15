@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criostoir</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f4f7fb;color:#172033}
+header{background:#123c69;color:white;padding:24px;text-align:center}
+header h1{margin:0;font-size:32px}
+header p{margin:8px 0 0}
+main{max-width:900px;margin:auto;padding:20px}
+.card{background:white;border-radius:14px;padding:20px;margin:15px 0;box-shadow:0 3px 12px #0001}
+button{border:0;border-radius:10px;padding:12px 18px;background:#1769aa;color:white;font-size:16px;margin:5px;cursor:pointer}
+input{padding:12px;border:1px solid #ccd3dd;border-radius:8px;width:90%;margin:6px 0}
+.result{font-size:20px;font-weight:bold;margin-top:12px}
+.warning{background:#fff4d6;padding:12px;border-radius:10px}
+footer{text-align:center;padding:25px;color:#667}
+</style>
+</head>
+
+<body>
+<header>
+<h1>💶 Criostoir</h1>
+<p>Simple Money & Market Planner</p>
+</header>
+
+<main>
+
+<div class="card">
+<h2>👋 Welcome</h2>
+<p>Criostoir helps you understand your money and plan your next move.</p>
+<div class="warning">
+<strong>Important:</strong> Criostoir is an educational planning tool, not financial advice.
+</div>
+</div>
+
+<div class="card">
+<h2>💰 Investment Calculator</h2>
+<label>Starting amount (€)</label><br>
+<input id="amount" type="number" value="200">
+
+<label>Monthly amount (€)</label><br>
+<input id="monthly" type="number" value="50">
+
+<label>Years</label><br>
+<input id="years" type="number" value="10">
+
+<label>Estimated annual return (%)</label><br>
+<input id="rate" type="number" value="5">
+
+<br>
+<button onclick="calculate()">Calculate</button>
+<div id="result" class="result"></div>
+</div>
+
+<div class="card">
+<h2>📊 Criostoir Planner</h2>
+<p>Use this simple checklist before investing:</p>
+<p>✅ Know how much you can afford</p>
+<p>✅ Keep emergency money separate</p>
+<p>✅ Understand what you are buying</p>
+<p>✅ Never invest money you cannot afford to lose</p>
+</div>
+
+<div class="card">
+<h2>🤖 Future Criostoir AI</h2>
+<p>The platform can later be expanded with market information, educational tools, alerts and automated planning.</p>
+<button onclick="alert('AI features coming in a future Criostoir version.')">Open AI Assistant</button>
+</div>
+
+</main>
+
+<footer>
+Criostoir © 2026
+</footer>
+
+<script>
+function calculate(){
+ const p=parseFloat(document.getElementById("amount").value)||0;
+ const m=parseFloat(document.getElementById("monthly").value)||0;
+ const years=parseInt(document.getElementById("years").value)||0;
+ const r=(parseFloat(document.getElementById("rate").value)||0)/100/12;
+ const n=years*12;
+ let total;
+
+ if(r===0){
+   total=p+m*n;
+ }else{
+   total=p*Math.pow(1+r,n)+m*((Math.pow(1+r,n)-1)/r);
+ }
+
+ document.getElementById("result").innerText=
+ "Illustrative value: €"+total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
